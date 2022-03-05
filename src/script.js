@@ -37,34 +37,24 @@ var globalArray = [
 	}
 ];
 $(document).ready(function() {
-	$('#search').on('keyup', function() {
+	$("#search").on("keyup", function() {
 		var value = $(this).val();
-		var flag = 0;
-		for (var i = 0; i < globalArray.length; i++){
-			var x = globalArray[i].name;
-			for(var j=0;i<x.length ;j++ ){
-				if(x[i]==value){
-					flag =1;
+	
+		$("table tr").each(function(index) {
+			if (index != 0) {
+	
+				$row = $(this);
+	
+				var id = $row.find("td:first").text();
+	
+				if (id.indexOf(value) != 0) {
+					$(this).hide();
+				}
+				else {
+					$(this).show();
 				}
 			}
-		}
-		if(flag!=1)
-			$('table tr').each(function(index) {
-				if (index !== 0) {
-					$row = $(this);
-
-					var id = $row.find('td:first').val();
-					var name = $row.find('td:second').val();
-
-					if (id.indexOf(value) !== 0) {
-						$row.hide();
-					} else if (name.indexOf(value) !== 0) {
-						$row.hide();
-					} else {
-						$row.show();
-					}
-				}
-			});
+		});
 	});
 
 	$('#btn').on('click', function() {
@@ -72,6 +62,7 @@ $(document).ready(function() {
 		
 	});
 });
+
 $('#btn1').on('click', function() {
 	filter();
 });
@@ -164,7 +155,7 @@ function remove(x) {
 	}
 }
 function display() {
-	var dis = '<table><tr><th>Id</th><th>Name</th><th>OS</th><th>Brand</th><th>remove</th></tr>';
+	var dis = '<table id="table"><tr><th>Id</th><th>Name</th><th>OS</th><th>Brand</th><th>remove</th></tr>';
 	for (var i = 0; i < globalArray.length; i++) {
 		dis +=
 			'<tr><td>' +
